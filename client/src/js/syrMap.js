@@ -161,7 +161,7 @@ class syrMap {
             // }
 
             document.getElementById('curtime').value = this.uavData[currIndex].TimeStep;
-            // Event.fire("currTime", this.uavData[currIndex].TimeStep);
+            Event.fire("currTime", this.uavData[currIndex].TimeStep);
             document.getElementById('curUAVnum').value = this.uavMap.size;
             while (currIndex < endIndex) {
                 currID = this.uavData[currIndex].ID;

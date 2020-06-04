@@ -180,8 +180,6 @@ class syrMap_reactive {
                         newUAV = new UAV(this.uavData[currIndex], marker);
                         newUAV.state = false;
                     }
-                    //new obj insert to uavMap
-                    newUAV = new UAV(this.uavData[currIndex], marker);
                     this.uavMap.set(currID, newUAV);
                     //console.log("new UAV ID ", currID);
                 } else {
@@ -263,6 +261,7 @@ class syrMap_reactive {
                         }
                         //if confict to normal
                         else if(this.uavData[currIndex].finished == 1 && currUAV.state == false){
+                            console.log(currUAV.ID);
                             currUAV.state = true;
                             currUAV.mapmarker.setMap(null);
                             currUAV.mapmarker = new google.maps.Marker({
