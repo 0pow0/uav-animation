@@ -59,6 +59,52 @@
                 </td>
             </tr>
         </table>
+        <table>
+            <tr>
+                <td>
+                    <label>Level 1</label>
+                </td>
+                <td>
+                    <label class="switch">
+                        <input id="l1ChkBox" type="radio" v-model="level" value="1"  v-on:change="setLevel1()">
+                        <span class="slider"></span>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Level 2</label>
+                </td>
+                <td>
+                    <label class="switch">
+                        <input id="l2ChkBox" type="radio" v-model="level" value="2"  v-on:change="setLevel2()">
+                        <span class="slider"></span>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Level 3</label>
+                </td>
+                <td>
+                    <label class="switch">
+                        <input id="l3ChkBox" type="radio" v-model="level" value="3"  v-on:change="setLevel3()">
+                        <span class="slider"></span>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Level 4</label>
+                </td>
+                <td>
+                    <label class="switch">
+                        <input id="l4ChkBox" type="radio" v-model="level" value="4"  v-on:change="setLevel4()">
+                        <span class="slider"></span>
+                    </label>
+                </td>
+            </tr>
+        </table>
     </div>
     </div>
 </template>
@@ -75,6 +121,7 @@ export default {
     data() {
         return {
             timeInterval: '',
+            level: ''
         }
     },
 
@@ -95,6 +142,22 @@ export default {
         },
         setHideUAVTrack() {
             Event.fire('setHideUAVTrack');
+        },
+        setLevel1() {
+            console.log(this.level);
+            Event.fire("level1", this.level);
+        },
+        setLevel2() {
+            console.log(this.level);
+            Event.fire("level2", this.level);
+        },
+        setLevel3() {
+            console.log(this.level);
+            Event.fire("level3", this.level);
+        },
+        setLevel4() {
+            console.log(this.level);
+            Event.fire("level4", this.level);
         },
     },
 }

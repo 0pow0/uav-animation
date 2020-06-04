@@ -2,10 +2,12 @@
 
 import UAV from './UAV'
 import UAVImage from '../assets/uav.png'
+import MAVController from './mav/MAVController'
+import MAV from "./mav/MAV";
 
 class syrMap {
 
-    constructor(mapID, uavdata, startArea, endArea,baseStation) {
+    constructor(mapID, uavdata, startArea, endArea,baseStation, mavData) {
         this.googlemap = new google.maps.Map(document.getElementById(mapID), {
             zoom: 13,
             center: {lat: 43.0481221, lng: -76.14742439999999},
@@ -27,6 +29,11 @@ class syrMap {
         this.baseStation = baseStation;
         //updated time for query
         this.updatedCurrTime = 0;
+
+        this.mavData = mavData;
+        this.mavController = new MAVController(this.googlemap, this.mavData);
+
+        // console.log("this.mavData len", this.mavData);
         //flags
         this.showTrackFlag = document.getElementById('uavTrackChkBox').checked;
         this.showUAVIDFlag = document.getElementById('uavIDChkBox').checked;
@@ -104,6 +111,7 @@ class syrMap {
     }
 
     checkTimeSeg() {
+
         let currTimeStep = this.uavData[0].TimeStep;
         let tempIndex = 0;
         while (tempIndex < this.uavData.length) {
@@ -112,8 +120,11 @@ class syrMap {
             }
             tempIndex += 1;
         }
+
         return tempIndex;
     }
+
+
 
     fly() {
         if (this.flying) {
@@ -128,7 +139,7 @@ class syrMap {
 
         let intervalId = setInterval(() => {
             //exit
-            if (this.uavData.length == 0) {
+            if (this.uavData.length === 0) {
                 console.log("done,", this.uavData.length);
                 clearInterval(intervalId);
                 return;
@@ -136,11 +147,21 @@ class syrMap {
             // console.log("length ", this.uavData.length);
             // console.log("first ele", this.uavData[0]);
             let endIndex = this.checkTimeSeg();
+
             let currIndex = 0;
             let currID = 0;
             let currUAV;
 
-            document.getElementById('curtime').value= this.uavData[currIndex].TimeStep;
+            // console.log(this.uavData[currIndex].TimeStep);
+            // console.log(document.getElementById('curtime').value, "  ", this.uavData[currIndex].TimeStep);
+
+            // if (document.getElementById('curtime').value != this.uavData[currIndex].TimeStep) {
+            //     console.log(document.getElementById('curtime').value, "  ", this.uavData[currIndex].TimeStep);
+            //     Event.fire("currTime");
+            // }
+
+            document.getElementById('curtime').value = this.uavData[currIndex].TimeStep;
+            // Event.fire("currTime", this.uavData[currIndex].TimeStep);
             document.getElementById('curUAVnum').value = this.uavMap.size;
             while (currIndex < endIndex) {
                 currID = this.uavData[currIndex].ID;
@@ -260,23 +281,25 @@ class syrMap {
                 this.pastTimeInterval.shift();
             }
         }, this.timeInterval);
+        console.log("after serInterval", intervalId);
         this.timeoutArr.push(intervalId);
     }
 
     pause() {
         this.flying = false;
+
         for (let item in this.timeoutArr) {
             clearTimeout(this.timeoutArr[item]);
         }
     }
 
     backtrack(backFlag) {
+        Event.fire2("mav backtrack", backFlag, document.getElementById('curtime').value-10*backFlag);
         // console.log(backFlag);
         this.pause();
 
         let steps = backFlag;
         let backstep = this.pastTimeInterval.splice(this.pastTimeInterval.length - steps, steps);
-
 
         let backUAVs = new Map();
         for (let i = backstep.length-1; i >= 0; i--) {
@@ -317,7 +340,7 @@ class syrMap {
 
     resume() {
         this.fly();
-        console.log(this.timeInterval);
+        // console.log(this.timeInterval);
     }
 
     setTimeInterval(val) {

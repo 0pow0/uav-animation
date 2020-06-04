@@ -7,7 +7,7 @@ const fs = require('fs');
 router.get('/', async (req, res) => {
     // const readStream=fs.createReadStream("./localdata/uav_coordinate_light.csv");
     console.log('mav.js');
-    const readStream=fs.createReadStream("./localdata/mav1.csv");
+    const readStream=fs.createReadStream("./localdata/mav3.csv");
     await csv().fromStream(readStream).pipe(res);
 });
 

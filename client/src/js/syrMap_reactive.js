@@ -1,10 +1,11 @@
 /*global google*/
 
 import UAV from './UAV'
+import MAVController from "./mav/MAVController";
 
 class syrMap_reactive {
 
-    constructor(mapID, uavdata, startArea, endArea) {
+    constructor(mapID, uavdata, startArea, endArea, mavData) {
         this.googlemap = new google.maps.Map(document.getElementById(mapID), {
             zoom: 13,
             center: {lat: 43.0481221, lng: -76.14742439999999}
@@ -27,6 +28,9 @@ class syrMap_reactive {
         this.hideUAVTrackFlag = document.getElementById('uavHideChkBox').checked;
         this.updateCurrtimeFlag = false;
         this.flying = false;
+        this.mavData = mavData;
+        this.mavController = new MAVController(this.googlemap, this.mavData);
+
         //store all the flying uav
         this.uavMap = new Map();
         //show area
@@ -128,6 +132,7 @@ class syrMap_reactive {
             let labelid = null;
 
             document.getElementById('curtime').value= this.uavData[currIndex].TimeStep;
+            Event.fire("currTime", this.uavData[currIndex].TimeStep);
             document.getElementById('curUAVnum').value = this.uavMap.size;
             while (currIndex < endIndex) {
                 currID = this.uavData[currIndex].ID;

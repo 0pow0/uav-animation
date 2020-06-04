@@ -6,7 +6,7 @@ const fs = require('fs');
 /* GET home page. */
 router.get('/', async (req, res) => {
     // const readStream=fs.createReadStream("./localdata/uav_coordinate_light.csv");
-    const readStream=fs.createReadStream("./localdata/uav_coordinate_reactive_level_2.csv");
+    const readStream=fs.createReadStream("./localdata/uav_coordinate_reactive_level_3.csv");
     await csv().fromStream(readStream).pipe(res);
 });
 

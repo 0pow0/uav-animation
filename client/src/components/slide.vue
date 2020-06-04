@@ -59,6 +59,9 @@ export default {
         backtrack(flag) {
             Event.fire('backtrack', flag);
         },
+        showMAV(){
+            Event.fire('showMAV');
+        }
     }
 };
 </script>

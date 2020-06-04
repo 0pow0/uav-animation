@@ -18,6 +18,10 @@ window.Event = new class {
     this.vue.$emit(event, data);
   }
 
+  fire2(event, data = null, data2 = null) {
+    this.vue.$emit(event, data, data2);
+  }
+
   listen(even, callback) {
     this.vue.$on(even, callback);
   }
