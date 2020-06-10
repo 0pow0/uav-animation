@@ -95,7 +95,7 @@ export default {
                     break;
                 case 'reactive':
                     if (flag === 'e') {
-                        this.uavData = await this.getUAVData(urlUAV_reactive);
+                        this.uavData = await this.getUAVDataWithLevel(urlUAV_reactive);
                         console.log("this uav data length",this.uavData.length);
                         console.log(`flag: ${flag}`);
                     } else if (flag === '1') {
@@ -152,8 +152,14 @@ export default {
                     this.mavData = await this.getMAVData(url_MAV1);
                     break;
                 case 'reactive':
-                    this.uavData = await this.getUAVData(urlUAV_reactive1);
-                    this.mavData = await this.getMAVData(url_MAV1);
+                    this.new_data_flag = true;
+                    this.mapGoogle.uavdata = [];
+                    await this.getIndependentUAVDataWithLevel(urlUAV_reactive1,
+                        this.mapGoogle.uavdata);
+                    // this.mavData = await this.getMAVData(url_MAV1);
+                    // this.mapGoogle.uavdata = uavData;
+                    // this.mapGoogle.mavData = null;
+                    // this.mapGoogle.mavData = this.mavData;
                     break;
                 case 'reduce_turn_point':
                     this.uavData = await this.getUAVData(urlUAV_tp1);
@@ -177,8 +183,10 @@ export default {
                     this.mavData = await this.getMAVData(url_MAV2);
                     break;
                 case 'reactive':
-                    this.uavData = await this.getUAVData(urlUAV_reactive2);
-                    this.mavData = await this.getMAVData(url_MAV2);
+                    this.new_data_flag = true;
+                    this.mapGoogle.uavdata = [];
+                    await this.getIndependentUAVDataWithLevel(urlUAV_reactive2,
+                        this.mapGoogle.uavdata);
                     break;
                 case 'reduce_turn_point':
                     this.uavData = await this.getUAVData(urlUAV_tp2);
@@ -202,8 +210,10 @@ export default {
                     this.mavData = await this.getMAVData(url_MAV3);
                     break;
                 case 'reactive':
-                    this.uavData = await this.getUAVData(urlUAV_reactive3);
-                    this.mavData = await this.getMAVData(url_MAV3);
+                    this.new_data_flag = true;
+                    this.mapGoogle.uavdata = [];
+                    await this.getIndependentUAVDataWithLevel(urlUAV_reactive3,
+                        this.mapGoogle.uavdata);
                     break;
                 case 'reduce_turn_point':
                     this.uavData = await this.getUAVData(urlUAV_tp3);
@@ -227,8 +237,10 @@ export default {
                     this.mavData = await this.getMAVData(url_MAV4);
                     break;
                 case 'reactive':
-                    this.uavData = await this.getUAVData(urlUAV_reactive4);
-                    this.mavData = await this.getMAVData(url_MAV4);
+                    this.new_data_flag = true;
+                    this.mapGoogle.uavdata = [];
+                    await this.getIndependentUAVDataWithLevel(urlUAV_reactive4,
+                        this.mapGoogle.uavdata);
                     break;
                 case 'reduce_turn_point':
                     this.uavData = await this.getUAVData(urlUAV_tp4);
@@ -325,6 +337,7 @@ export default {
             return new Promise(async (resolve, reject) => {
                 try {
                     var _this = this;
+                    // console.log(_this);
                     console.log("get data from",uavURL);
                     oboe(uavURL).node(
                         '{TimeStep ID Latitude Longitude SignalStrength CurrentBasestation finished}',
@@ -343,6 +356,86 @@ export default {
                         );
                     }
                 } catch(err) {
+                    reject(err);
+                }
+            })
+        },
+
+        getUAVDataWithLevel(uavURL) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    var _this = this;
+                    console.log("get data from",uavURL);
+                    oboe(uavURL)
+                        .node(
+                        '{TimeStep ID Latitude Longitude SignalStrength CurrentBasestation ' +
+                        'finished Trajectory Level}',
+                        async function (jsonObject) {
+                            if (_this.new_data_flag) {
+                                console.log("abort");
+                                this.abort();
+                            }else {
+                                _this.uavData.push(jsonObject);
+                                // console.log(_this.uavData.length);
+                            }
+                        });
+                    // console.log("_this uav data length",_this.uavData.length);
+                    const flag = await _this.checkUAVData();
+                    if (flag) {
+                        console.log("_this uav data length",_this.uavData.length);
+
+                        resolve(
+                            _this.uavData.map(post => ({
+                                ...post,
+                            }))
+                        );
+                    }
+                } catch(err) {
+                    reject(err);
+                }
+            })
+        },
+
+        getIndependentUAVDataWithLevel(uavURL, data) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    let _this = this;
+                    console.log("get data from",uavURL);
+                    oboe(uavURL).node(
+                        '{TimeStep ID Latitude Longitude SignalStrength CurrentBasestation ' +
+                        'finished Trajectory Level}',
+                        async function (jsonObject) {
+                            // if (data.length > 100) {data.splice(0, 10);}
+                             data.push(jsonObject);
+                        }
+                    );
+                    // console.log("_this uav data length",_this.uavData.length);
+                    const flag = await _this.checkIndependentLevelData(data);
+                    if (flag) {
+                        // console.log("_this uav data length",_this.uavData.length);
+                        // console.log("resolve!");
+                        resolve(
+                            data.map(post => ({
+                                ...post,
+                            }))
+                        );
+                    }
+                } catch(err) {
+                    reject(err);
+                }
+            })
+        },
+
+        checkIndependentLevelData(data) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    let x = setInterval(() => {
+                        if(data.length >= 100) {
+                            clearInterval(x);
+                            resolve(true);
+                        }
+                    }, 0);
+                } catch (err) {
                     reject(err);
                 }
             })

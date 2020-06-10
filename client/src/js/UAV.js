@@ -1,6 +1,6 @@
 class UAV {
 
-    constructor(data,mapmarker) {
+    constructor(data,mapmarker, level) {
         this.ID = data.ID;
         this.lat=Number(data.Latitude);
         this.long=Number(data.Longitude);
@@ -8,6 +8,8 @@ class UAV {
         this.prePath = [];
         this.uavPath = {};
         this.state = true;
+        if (level == null) this.level = null;
+        else this.level = level
     }
 
     // remove the num lastest vertex in path

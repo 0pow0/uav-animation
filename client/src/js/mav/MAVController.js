@@ -14,7 +14,6 @@ class MAVController {
     }
 
     extractMAV(timeStep){
-        console.log("timeStep", timeStep);
         let res = [];
         let seg = 0;
         for (let i = 0; i < this.mavData.length; i++) {

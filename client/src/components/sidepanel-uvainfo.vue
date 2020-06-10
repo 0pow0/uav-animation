@@ -62,7 +62,7 @@
         <table>
             <tr>
                 <td>
-                    <label>Level 1</label>
+                    <label class="level1">Level 1</label>
                 </td>
                 <td>
                     <label class="switch">
@@ -73,7 +73,7 @@
             </tr>
             <tr>
                 <td>
-                    <label>Level 2</label>
+                    <label class="level2">Level 2</label>
                 </td>
                 <td>
                     <label class="switch">
@@ -84,7 +84,7 @@
             </tr>
             <tr>
                 <td>
-                    <label>Level 3</label>
+                    <label class="level3">Level 3</label>
                 </td>
                 <td>
                     <label class="switch">
@@ -95,7 +95,7 @@
             </tr>
             <tr>
                 <td>
-                    <label>Level 4</label>
+                    <label class="level4">Level 4</label>
                 </td>
                 <td>
                     <label class="switch">
@@ -201,6 +201,22 @@ export default {
     .auvOption {
         padding-top: 20px;
         padding-bottom: 10px;
+    }
+    .level1 {
+        background-color: #95ff6d;
+        color: white;
+    }
+    .level2 {
+        background-color: #32b300;
+        color: white;
+    }
+    .level3 {
+        background-color: #00aeff;
+        color: white;
+    }
+    .level4 {
+        background-color: #1500ff;
+        color: white;
     }
 </style>
 
