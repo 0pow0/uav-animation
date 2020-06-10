@@ -181,7 +181,7 @@ class syrMap_reactive {
             let currUAV;
             let labelid = null;
 
-            console.log(this._uavdata[currIndex].TimeStep);
+            // console.log(this._uavdata[currIndex].TimeStep);
             document.getElementById('curtime').value= this._uavdata[currIndex].TimeStep;
             Event.fire("currTime", this._uavdata[currIndex].TimeStep);
             document.getElementById('curUAVnum').value = this.uavMap.size;
