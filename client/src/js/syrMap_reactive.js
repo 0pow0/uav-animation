@@ -180,6 +180,7 @@ class syrMap_reactive {
             let currID = 0;
             let currUAV;
             let labelid = null;
+            let image = this.missingIcon;
 
             // console.log(this._uavdata[currIndex].TimeStep);
             document.getElementById('curtime').value= this._uavdata[currIndex].TimeStep;
@@ -192,7 +193,22 @@ class syrMap_reactive {
                 //console.log("curr Index ", currIndex);
                 //console.log("curr uav ID", currID);
                 //new UAV
-                let image;
+                switch (currLevel) {
+                    case "1":
+                        image = this.level1;
+                        break;
+                    case "2":
+                        image = this.level2;
+                        break;
+                    case "3":
+                        image = this.level3;
+                        break;
+                    case "4":
+                        image = this.level4;
+                        break;
+                    default:
+                        image = this.missingIcon;
+                }
                 if (!this.uavMap.has(currID)) {
                     //new icon
 
@@ -203,22 +219,6 @@ class syrMap_reactive {
                         image =  this.uavImageNull;
                     } else {
                         // image = this.missingIcon;
-                        switch (currLevel) {
-                            case "1":
-                                image = this.level1;
-                                break;
-                            case "2":
-                                image = this.level2;
-                                break;
-                            case "3":
-                                image = this.level3;
-                                break;
-                            case "4":
-                                image = this.level4;
-                                break;
-                            default:
-                                image = this.missingIcon;
-                        }
                         labelid = null;
                     }
                     // make marker
