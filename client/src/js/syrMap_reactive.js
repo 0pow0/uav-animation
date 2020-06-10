@@ -332,7 +332,7 @@ class syrMap_reactive {
                         }
                         //if confict to normal
                         else if(this._uavdata[currIndex].finished == 1 && currUAV.state == false){
-                            console.log(currUAV.ID);
+                            // console.log(currUAV.ID);
                             currUAV.state = true;
                             currUAV.mapmarker.setMap(null);
                             currUAV.mapmarker = new google.maps.Marker({
