@@ -9,7 +9,7 @@ class MAVController {
         this.past = [];
         this.mavMap = new Map();
         Event.listen("currTime", (timeStep) => this.fly(timeStep));
-        Event.listen("mav backtrack", (backFlag, currTime) => this.backtrack(backFlag, currTime))
+        Event.listen("mav backtrack", (backFlag, currTime) => this.backtrack(backFlag, currTime));
         this._mavData = mavData;
     }
 

@@ -381,7 +381,7 @@ class syrMap_reactive {
     }
 
     backtrack(backFlag) {
-        Event.fire2("mav backtrack", backFlag, document.getElementById('curtime').value-10*backFlag);
+        Event.fire2("mav backtrack", backFlag, (Math.floor((document.getElementById('curtime').value-backFlag)/10) * 10));
         // console.log(backFlag);
         this.pause();
 
