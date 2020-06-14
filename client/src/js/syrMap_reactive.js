@@ -89,16 +89,23 @@ class syrMap_reactive {
         return this._uavdata;
     }
 
-    set mavData(value) {
-        this._mavData = value;
-    }
-
     set uavdata(value) {
         this._uavdata = [];
-        console.log("this is uavdata setter");
-        console.log(this._uavdata.length);
+        // console.log("this is uavdata setter");
+        // console.log(this._uavdata.length);
         this._uavdata = value;
-        console.log(this._uavdata.length);
+        // console.log(this._uavdata.length);
+    }
+
+    set mavData(value) {
+        this._mavData = [];
+        this._mavData = value;
+        this.mavController.mavData = [];
+        this.mavController.mavData = value;
+    }
+
+    get mavData() {
+        return this._mavData;
     }
 
     showStartArea() {
@@ -374,6 +381,7 @@ class syrMap_reactive {
     }
 
     backtrack(backFlag) {
+        Event.fire2("mav backtrack", backFlag, document.getElementById('curtime').value-10*backFlag);
         // console.log(backFlag);
         this.pause();
 

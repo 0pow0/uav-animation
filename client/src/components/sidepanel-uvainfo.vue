@@ -18,7 +18,7 @@
         <div class="separate-line"></div>
         <p>
             <label for='timeinterval' class="label">Animation speed interval:</label>
-            <!-- <input type="text" class="txtbox" id="timeinterval"  v-on:change="setTimeInterval()" v-model="timeInterval" placeholder="0"> -->
+<!--            <input type="text" class="txtbox" id="timeinterval"  v-on:change="setTimeInterval()" v-model="timeInterval" placeholder="0">-->
             <ticks></ticks>
         </p>
         
@@ -132,6 +132,7 @@ export default {
             Event.fire('getCurrTime', time);
         },
         setTimeInterval() {
+            console.log(this.timeInterval);
             Event.fire('setTimeInterval', this.timeInterval)
         },
         setShowTrack() {

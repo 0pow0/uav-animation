@@ -39,6 +39,7 @@
     },
     methods: {
         setTimeInterval(speed) {
+            console.log(speed);
             Event.fire('setTimeInterval', speed)
         },
     },

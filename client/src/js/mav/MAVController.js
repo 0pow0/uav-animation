@@ -6,18 +6,27 @@ class MAVController {
     constructor(sourceMap, mavData) {
         // console.log("MAVController");
         this._sourceMap = sourceMap;
-        this.mavData = mavData;
         this.past = [];
         this.mavMap = new Map();
         Event.listen("currTime", (timeStep) => this.fly(timeStep));
         Event.listen("mav backtrack", (backFlag, currTime) => this.backtrack(backFlag, currTime))
+        this._mavData = mavData;
+    }
+
+
+    get mavData() {
+        return this._mavData;
+    }
+
+    set mavData(value) {
+        this._mavData = value;
     }
 
     extractMAV(timeStep){
         let res = [];
         let seg = 0;
-        for (let i = 0; i < this.mavData.length; i++) {
-            if (this.mavData[i].TimeStep == timeStep) res.push(this.mavData[i]);
+        for (let i = 0; i < this._mavData.length; i++) {
+            if (this._mavData[i].TimeStep == timeStep) res.push(this._mavData[i]);
         }
         // console.log("seg ", seg, "res len : ", res.length, " mav data len: ", this.mavData.length);
 
@@ -32,7 +41,7 @@ class MAVController {
         for (let i = 0; i < data.length; i++) {
             if (!this.mavMap.has(data[i].ID)) {
                 // console.log("没有 ："+i);
-                this.mavMap.set(data[i].ID, new MAV(this._sourceMap, data[i]))
+                this.mavMap.set(data[i].ID, new MAV(this._sourceMap, data[i], data[i].level))
             }
             else {
                 if (data[i].finished === "-1") {

@@ -160,6 +160,8 @@ export default {
                     // this.mapGoogle.uavdata = uavData;
                     // this.mapGoogle.mavData = null;
                     // this.mapGoogle.mavData = this.mavData;
+                    this.mapGoogle.mavData = [];
+                    await this.getMAVDataWithLevel(url_MAV1, this.mapGoogle.mavData);
                     break;
                 case 'reduce_turn_point':
                     this.uavData = await this.getUAVData(urlUAV_tp1);
@@ -187,6 +189,7 @@ export default {
                     this.mapGoogle.uavdata = [];
                     await this.getIndependentUAVDataWithLevel(urlUAV_reactive2,
                         this.mapGoogle.uavdata);
+                    await this.getMAVDataWithLevel(url_MAV2, this.mapGoogle.mavData);
                     break;
                 case 'reduce_turn_point':
                     this.uavData = await this.getUAVData(urlUAV_tp2);
@@ -214,6 +217,7 @@ export default {
                     this.mapGoogle.uavdata = [];
                     await this.getIndependentUAVDataWithLevel(urlUAV_reactive3,
                         this.mapGoogle.uavdata);
+                    await this.getMAVDataWithLevel(url_MAV3, this.mapGoogle.mavData);
                     break;
                 case 'reduce_turn_point':
                     this.uavData = await this.getUAVData(urlUAV_tp3);
@@ -241,6 +245,7 @@ export default {
                     this.mapGoogle.uavdata = [];
                     await this.getIndependentUAVDataWithLevel(urlUAV_reactive4,
                         this.mapGoogle.uavdata);
+                    await this.getMAVDataWithLevel(url_MAV4, this.mapGoogle.mavData);
                     break;
                 case 'reduce_turn_point':
                     this.uavData = await this.getUAVData(urlUAV_tp4);
@@ -311,9 +316,14 @@ export default {
                     var _this = this;
                     console.log("get data from", urlMAV);
                     oboe(urlMAV).node(
-                        '{TimeStep ID Latitude Longitude finished}',
+                        '{TimeStep ID Latitude Longitude finished level}',
                         async function (jsonObject) {
-                            _this.mavData.push(jsonObject);
+                            if (_this.new_data_flag) {
+                                console.log("initial mav pipe abort");
+                                this.abort();
+                            }else {
+                                _this.mavData.push(jsonObject);
+                            }
                         }
                     );
                     const flag = await _this.checkMAVData();
@@ -332,6 +342,47 @@ export default {
             })
         },
 
+        getMAVDataWithLevel(urlMAV, data){
+            return new Promise(async (resolve, reject) => {
+                try {
+                    var _this = this;
+                    console.log("get data from", urlMAV);
+                    oboe(urlMAV).node(
+                        '{TimeStep ID Latitude Longitude finished level}',
+                        async function (jsonObject) {
+                            data.push(jsonObject);
+                        }
+                    );
+                    const flag = await _this.checkMAVDataWithLevel(data);
+                    if (flag) {
+                        // console.log("_this mav data length",_this.mavData.length);
+                        resolve(
+                            data.map(post => ({
+                                ...post,
+                            }))
+                        )
+                    }
+                    // console.log(_this.mavData);
+                } catch (err) {
+                    reject(err);
+                }
+            })
+        },
+
+        checkMAVDataWithLevel(data) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    let x = setInterval(() => {
+                        if(data.length >= 100) {
+                            clearInterval(x);
+                            resolve(true);
+                        }
+                    }, 0);
+                } catch (err) {
+                    reject(err);
+                }
+            })
+        },
 
         getUAVData(uavURL) {
             return new Promise(async (resolve, reject) => {
@@ -372,7 +423,7 @@ export default {
                         'finished Trajectory Level}',
                         async function (jsonObject) {
                             if (_this.new_data_flag) {
-                                console.log("abort");
+                                console.log("initial uav pipe abort");
                                 this.abort();
                             }else {
                                 _this.uavData.push(jsonObject);
