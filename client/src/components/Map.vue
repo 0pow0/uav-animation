@@ -189,6 +189,7 @@ export default {
                     this.mapGoogle.uavdata = [];
                     await this.getIndependentUAVDataWithLevel(urlUAV_reactive2,
                         this.mapGoogle.uavdata);
+                    this.mapGoogle.mavData = [];
                     await this.getMAVDataWithLevel(url_MAV2, this.mapGoogle.mavData);
                     break;
                 case 'reduce_turn_point':
@@ -217,6 +218,7 @@ export default {
                     this.mapGoogle.uavdata = [];
                     await this.getIndependentUAVDataWithLevel(urlUAV_reactive3,
                         this.mapGoogle.uavdata);
+                    this.mapGoogle.mavData = [];
                     await this.getMAVDataWithLevel(url_MAV3, this.mapGoogle.mavData);
                     break;
                 case 'reduce_turn_point':
@@ -245,6 +247,7 @@ export default {
                     this.mapGoogle.uavdata = [];
                     await this.getIndependentUAVDataWithLevel(urlUAV_reactive4,
                         this.mapGoogle.uavdata);
+                    this.mapGoogle.mavData = [];
                     await this.getMAVDataWithLevel(url_MAV4, this.mapGoogle.mavData);
                     break;
                 case 'reduce_turn_point':
