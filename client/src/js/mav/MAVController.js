@@ -54,6 +54,7 @@ class MAVController {
                     continue;
                 }
                 let currMAV = this.mavMap.get(data[i].ID);
+                currMAV.updateLevelIcon(data[i].level);
                 currMAV.marker.setPosition({
                     lat: Number(data[i].Latitude),
                     lng: Number(data[i].Longitude)

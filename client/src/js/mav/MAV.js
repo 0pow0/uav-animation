@@ -85,6 +85,25 @@ class MAV {
         this.path = {}
     }
 
+    updateLevelIcon(level) {
+        switch (level) {
+            case "1":
+                this.marker.setIcon(this.level1);
+                break;
+            case "2":
+                this.marker.setIcon(this.level2);
+                break;
+            case "3":
+                this.marker.setIcon(this.level3);
+                break;
+            case "4":
+                this.marker.setIcon(this.level4);
+                break;
+            default:
+                this.marker.setIcon(this.markerStyle);
+        }
+    }
+
     get ID() {
         return this._ID;
     }
