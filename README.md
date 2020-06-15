@@ -1,6 +1,10 @@
 # 2020 SU UAV Animation(Vue)
 
+Update TODO: 6.15.2020
 
+- [ ] Erase the icon left by MAV that has changed level
+
+---
 
 Update TODO: 6.10.2020
 
