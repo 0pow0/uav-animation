@@ -44,7 +44,7 @@ class MAVController {
                 this.mavMap.set(data[i].ID, new MAV(this._sourceMap, data[i], data[i].level))
             }
             else {
-                if (data[i].finished === "-1") {
+                if (data[i].finished === "-1" || data[i].finished === "-2") {
                     // console.log("data[i].finished === \"-1\" "+i);
                     this.mavMap.get(data[i].ID).marker.setMap(null);
                     if (Object.getOwnPropertyNames(this.mavMap.get(data[i].ID).path).length > 0) {
