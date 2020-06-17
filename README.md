@@ -1,12 +1,13 @@
 # 2020 SU UAV Animation(Vue)
 Update Jun 17 
-- [ ] Flightradar24
-- [ ] Flightaware
+- Average number of Manned Aircraft in the area
+  - [ ] Flightradar24
+  - [ ] Flightaware
 
 ---
 Update TODO: 6.15.2020
 
-- [ ] Erase the icon left by MAV that has changed level
+- [x] Erase the icon left by MAV that has changed level
 
 ---
 
