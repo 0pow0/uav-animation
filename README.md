@@ -1,8 +1,15 @@
 # 2020 SU UAV Animation(Vue)
+Update Jun 17 
+- Average number of Manned Aircraft in the area
+  - [ ] Flightradar24
+  - [ ] Flightaware
+- show conflicts in dashboard
+- Cesium????
 
+---
 Update TODO: 6.15.2020
 
-- [ ] Erase the icon left by MAV that has changed level
+- [x] Erase the icon left by MAV that has changed level
 
 ---
 
