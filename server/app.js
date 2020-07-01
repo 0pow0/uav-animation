@@ -10,6 +10,8 @@ app.use(bodyParser.json())
 app.use(cors())
 
 
+const log = require('./routes/log/log');
+app.use('/log/log', log);
 const endArea = require('./routes/uav/endArea')
 app.use('/uav/endArea', endArea)
 const startArea = require('./routes/uav/startArea')

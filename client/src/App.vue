@@ -3,6 +3,7 @@
     <!-- <Map/> -->
     <router-view name="main"/>
     <router-view name="sidepanel"/>
+    <router-view name="testTable"/>
     <!-- <component 
       :is="currentMenu" :right="side === 'right' ? true: false">
     </component> -->

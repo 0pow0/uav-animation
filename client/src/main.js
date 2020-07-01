@@ -5,6 +5,11 @@ import './assets/styles.less'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import Ripple from 'vue-ripple-directive'
+// 引入样式
+import 'vue-easytable/libs/themes-base/index.css'
+// 导入 table 和 分页组件
+import {VTable,VPagination} from 'vue-easytable'
+
 
 Vue.use(Vuetify)
 Vue.directive('ripple', Ripple);
@@ -29,6 +34,8 @@ window.Event = new class {
 }
 
 Vue.config.productionTip = false
+Vue.component(VTable.name, VTable)
+Vue.component(VPagination.name, VPagination)
 
 new Vue({
   router,

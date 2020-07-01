@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Map from '@/components/Map'
 import Slide from '@/components/slide'
+import TestTable from '@/components/testTable'
 
 Vue.use(Router)
 
@@ -15,6 +16,7 @@ export default new Router({
             components: {
                 main: Map,
                 sidepanel: Slide,
+                testTable: TestTable
             },
             props: {
                 main: true,
@@ -27,6 +29,7 @@ export default new Router({
             components: {
                 main: Map,
                 sidepanel: Slide,
+                testTable: TestTable
             }
         },
     ]
