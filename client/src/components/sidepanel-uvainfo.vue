@@ -62,7 +62,7 @@
         <table>
             <tr>
                 <td>
-                    <label class="level1">Level 1</label>
+                    <label class="level1">Level 1(500-1200ft)</label>
                 </td>
                 <td>
                     <label class="switch">
@@ -73,7 +73,7 @@
             </tr>
             <tr>
                 <td>
-                    <label class="level2">Level 2</label>
+                    <label class="level2">Level 2(1200-3000ft)</label>
                 </td>
                 <td>
                     <label class="switch">
@@ -84,7 +84,7 @@
             </tr>
             <tr>
                 <td>
-                    <label class="level3">Level 3</label>
+                    <label class="level3">Level 3(3000-5000ft)</label>
                 </td>
                 <td>
                     <label class="switch">
@@ -95,7 +95,7 @@
             </tr>
             <tr>
                 <td>
-                    <label class="level4">Level 4</label>
+                    <label class="level4">Level 4(5000-18000ft)</label>
                 </td>
                 <td>
                     <label class="switch">
