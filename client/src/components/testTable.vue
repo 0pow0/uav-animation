@@ -75,7 +75,7 @@
                         // console.log(_this);
                         console.log("get data from",logurl);
                         oboe(logurl).node(
-                            '{Time_Step UAV_ID Latitude Longitude Old_X_speed Old_Y_speed X_speed Y_speed Conflict_UAV}',
+                            '{Time_Step UAV_ID Latitude Longitude Old_X_speed Old_Y_speed X_speed Y_speed Conflict_UAV Flag}',
                             async function (jsonObject) {
                                 _this.logData.push(jsonObject);
                             }
