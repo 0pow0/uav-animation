@@ -13,7 +13,7 @@ class MAV {
             fillOpacity: 2,
             strokeWeight: 3,
             strokeOpacity: 0.5,
-            rotation: 270
+
         };
 
         this.level2 = {
@@ -23,7 +23,6 @@ class MAV {
             fillOpacity: 2,
             strokeWeight: 3,
             strokeOpacity: 0.5,
-            rotation: 270
         };
 
         this.level3 = {
@@ -33,7 +32,7 @@ class MAV {
             fillOpacity: 2,
             strokeWeight: 3,
             strokeOpacity: 0.5,
-            rotation: 270
+
         };
 
         this.level4 = {
@@ -43,7 +42,7 @@ class MAV {
             fillOpacity: 2,
             strokeWeight: 3,
             strokeOpacity: 0.5,
-            rotation: 270
+
         };
 
         switch (level) {

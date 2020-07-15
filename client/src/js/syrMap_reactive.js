@@ -10,6 +10,9 @@ class syrMap_reactive {
             zoom: 13,
             center: {lat: 43.0481221, lng: -76.14742439999999}
         });
+
+        this.yellow_dot = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+        this.red_dot = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
         //for animation
         this.timeoutArr = [];
         //pointing to json
@@ -323,7 +326,15 @@ class syrMap_reactive {
                         //update uav obj position
                         currUAV.lat = Number(this._uavdata[currIndex].Latitude);
                         currUAV.long = Number(this._uavdata[currIndex].Longitude);
-
+                        let icon = null;
+                        // conflict with uav is yellow
+                        if (this._uavdata[currIndex].Flag == 1) {
+                            icon = this.yellow_dot;
+                        }
+                        // conflict with mav is red
+                        if (this._uavdata[currIndex].Flag == 2) {
+                            icon = this.red_dot;
+                        }
                         //if normnal to conflict
                         if (this._uavdata[currIndex].finished == 2 && currUAV.state == true) {
                             currUAV.state = false;
@@ -334,6 +345,7 @@ class syrMap_reactive {
                                     lng: currUAV.long
                                 },
                                 map: this.googlemap,
+                                icon: icon
                             });
                             //console.log("change to confict");
                         }

@@ -423,7 +423,7 @@ export default {
                     oboe(uavURL)
                         .node(
                         '{TimeStep ID Latitude Longitude SignalStrength CurrentBasestation ' +
-                        'finished Trajectory Level}',
+                        'finished Trajectory Level Flag}',
                         async function (jsonObject) {
                             if (_this.new_data_flag) {
                                 console.log("initial uav pipe abort");
@@ -457,7 +457,7 @@ export default {
                     console.log("get data from",uavURL);
                     oboe(uavURL).node(
                         '{TimeStep ID Latitude Longitude SignalStrength CurrentBasestation ' +
-                        'finished Trajectory Level}',
+                        'finished Trajectory Level Flag}',
                         async function (jsonObject) {
                             // if (data.length > 100) {data.splice(0, 10);}
                              data.push(jsonObject);

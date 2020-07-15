@@ -54,11 +54,19 @@ class MAVController {
                     continue;
                 }
                 let currMAV = this.mavMap.get(data[i].ID);
+                // let rotation = Math.atan((data[i].Longitude - currMAV.longitude) / (data[i].Latitude - currMAV.latitude));
+                // if ((data[i].Latitude - currMAV.latitude) < 0) {
+                //     if (rotation >= 0) rotation += 90;
+                //     else rotation -= 90;
+                // }
                 currMAV.updateLevelIcon(data[i].level);
                 currMAV.marker.setPosition({
                     lat: Number(data[i].Latitude),
-                    lng: Number(data[i].Longitude)
+                    lng: Number(data[i].Longitude),
                 });
+                // currMAV.markerStyle.rotation = rotation;
+                // currMAV.marker.setIcon(currMAV.markerStyle);
+
                 if (Object.getOwnPropertyNames(currMAV.path).length <= 0) {
                     currMAV.path = new google.maps.Polyline({
                         path: [
