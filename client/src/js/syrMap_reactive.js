@@ -336,7 +336,7 @@ class syrMap_reactive {
                             icon = this.red_dot;
                         }
                         //if normnal to conflict
-                        if (this._uavdata[currIndex].finished == 2 && currUAV.state == true) {
+                        if (this._uavdata[currIndex].finished == 2) {
                             currUAV.state = false;
                             currUAV.mapmarker.setMap(null);
                             currUAV.mapmarker = new google.maps.Marker({
