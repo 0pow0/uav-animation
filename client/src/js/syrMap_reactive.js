@@ -204,20 +204,20 @@ class syrMap_reactive {
                 //console.log("curr uav ID", currID);
                 //new UAV
                 switch (currLevel) {
-                    case "1":
+                    case '1':
                         image = this.level1;
                         break;
-                    case "2":
+                    case '2':
                         image = this.level2;
                         break;
-                    case "3":
+                    case '3':
                         image = this.level3;
                         break;
-                    case "4":
+                    case '4':
                         image = this.level4;
                         break;
                     default:
-                        image = this.missingIcon;
+                        image = this.missingIcon
                 }
                 if (!this.uavMap.has(currID)) {
                     //new icon
@@ -255,7 +255,8 @@ class syrMap_reactive {
                                 lng: Number(this._uavdata[currIndex].Longitude)
                             },
                             map: this.googlemap,
-                            label: labelid
+                            label: labelid,
+                            icon: image
                         });
                         newUAV = new UAV(this._uavdata[currIndex], marker);
                         newUAV.state = false;
