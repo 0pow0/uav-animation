@@ -1,5 +1,17 @@
 # 2020 SU UAV Animation(Vue)
+Update Aug 8
+
+Finally stable version
+
+- Timestp in both UAV data and MAV data should keep same
+- before clicking fly btn, waitting for about 10 seconds for initializing data to prevent from missing some time steps.
+- Max time steps currently is 500
+- Float precision should not more than .7f
+
+---
+
 Update Jun 17 
+
 - Average number of Manned Aircraft in the area
   - [ ] Flightradar24
   - [ ] Flightaware
