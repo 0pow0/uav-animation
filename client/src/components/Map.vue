@@ -119,6 +119,7 @@ export default {
                     this.mapGoogle = new syrMap2('map',this.uavData,this.startData,this.endData);
             }
 
+
             this.test = 0;
             // uav event listener
             Event.listen('startFly', ()=> this.mapGoogle.fly());
