@@ -9,9 +9,9 @@ import syrMap from '../js/syrMap'
 import syrMap2 from '../js/syrMap2'
 import syrMap_nocheck from '../js/syrMap_nocheck'
 import syrMap_reactive from '../js/syrMap_reactive';
-const urlStartArea = 'uav/startArea/'
-const urlEndArea = 'uav/endArea/'
-const urlBastStation = 'uav/baseStation/'
+const urlStartArea = 'uav/startArea/';
+const urlEndArea = 'uav/endArea/';
+const urlBastStation = 'uav/baseStation/';
 
 const urlUAV = 'uav/uav/';
 const url_UAV_1 = 'uav/uav1/';
@@ -328,6 +328,7 @@ export default {
                             }else {
                                 _this.mavData.push(jsonObject);
                             }
+                            return oboe.drop;
                         }
                     );
                     const flag = await _this.checkMAVData();
@@ -355,6 +356,7 @@ export default {
                         '{TimeStep ID Latitude Longitude finished level}',
                         async function (jsonObject) {
                             data.push(jsonObject);
+                            return oboe.drop;
                         }
                     );
                     const flag = await _this.checkMAVDataWithLevel(data);
@@ -421,18 +423,24 @@ export default {
                 try {
                     var _this = this;
                     console.log("get data from",uavURL);
+                    let pool = [];
                     oboe(uavURL)
                         .node(
-                        '{TimeStep ID Latitude Longitude SignalStrength CurrentBasestation ' +
-                        'finished Trajectory Level Flag}',
+                        '{TimeStep ID Latitude Longitude ' +
+                        'finished Level Flag}',
                         async function (jsonObject) {
                             if (_this.new_data_flag) {
                                 console.log("initial uav pipe abort");
                                 this.abort();
-                            }else {
+                            }
+                            else if (_this.uavData.length > 10000) {
+                                this.forget()
+                            }
+                            else {
                                 _this.uavData.push(jsonObject);
                                 // console.log(_this.uavData.length);
                             }
+                            return oboe.drop;
                         });
                     // console.log("_this uav data length",_this.uavData.length);
                     const flag = await _this.checkUAVData();
@@ -457,11 +465,12 @@ export default {
                     let _this = this;
                     console.log("get data from",uavURL);
                     oboe(uavURL).node(
-                        '{TimeStep ID Latitude Longitude SignalStrength CurrentBasestation ' +
-                        'finished Trajectory Level Flag}',
+                        '{TimeStep ID Latitude Longitude ' +
+                        'finished Level Flag}',
                         async function (jsonObject) {
                             // if (data.length > 100) {data.splice(0, 10);}
                              data.push(jsonObject);
+                            return oboe.drop;
                         }
                     );
                     // console.log("_this uav data length",_this.uavData.length);

@@ -2,6 +2,7 @@
 
 import UAV from './UAV'
 import MAVController from "./mav/MAVController";
+import uavIcon from '../assets/uav.png'
 
 class syrMap_reactive {
 
@@ -222,7 +223,6 @@ class syrMap_reactive {
                 if (!this.uavMap.has(currID)) {
                     //new icon
 
-
                     //if show uav id
                     if (this.showUAVIDFlag) {
                         labelid = this._uavdata[currIndex].ID;
@@ -389,7 +389,7 @@ class syrMap_reactive {
     pause() {
         this.flying = false;
         for (let item in this.timeoutArr) {
-            clearTimeout(this.timeoutArr[item]);
+            clearInterval(this.timeoutArr[item]);
         }
     }
 
