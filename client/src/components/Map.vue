@@ -433,11 +433,11 @@ export default {
                                 console.log("initial uav pipe abort");
                                 this.abort();
                             }
-                            else if (_this.uavData.length > 10000) {
-                                this.forget()
-                            }
                             else {
-                                _this.uavData.push(jsonObject);
+                                pool.push(jsonObject);
+                                if (pool.length > 1000) {
+                                    _this.uavData.push(pool.shift());
+                                }
                                 // console.log(_this.uavData.length);
                             }
                             return oboe.drop;
