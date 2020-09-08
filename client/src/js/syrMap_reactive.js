@@ -437,6 +437,7 @@ class syrMap_reactive {
                 this.uavMap.set(key, currUAV);
             }
         }
+        document.getElementById('curtime').value= this._uavdata[0].TimeStep;
     }
 
     resume() {
