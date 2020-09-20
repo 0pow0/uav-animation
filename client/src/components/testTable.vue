@@ -27,7 +27,8 @@
                     {field: 'id', title: 'id', width: 80, titleAlign: 'center', columnAlign: 'center',isResize:true},
                     {field: 'latitude', title: 'latitude', width: 150, titleAlign: 'center', columnAlign: 'center',isResize:true},
                     {field: 'longitude', title: 'longitude', width: 150, titleAlign: 'center', columnAlign: 'center',isResize:true},
-                    {field: 'conflict_ID', title: 'Conflict with', width: 280, titleAlign: 'center', columnAlign: 'left',isResize:true}
+                    {field: 'conflict_ID', title: 'Conflict with', width: 280, titleAlign: 'center', columnAlign: 'left',isResize:true},
+                    {field: 'conflict_type', title: 'Conflict Type', width: 280, titleAlign: 'center', columnAlign: 'left',isResize:true}
                 ],
                 logData: [],
                 tableData: []
@@ -60,6 +61,7 @@
                         temp["latitude"] = this.logData[i].Latitude;
                         temp["longitude"] = this.logData[i].Longitude;
                         temp["conflict_ID"] = this.logData[i].Conflict_UAV;
+                        temp["conflict_type"] = this.logData[i].Flag;
                         res.push(temp);
                     }
                 }
@@ -75,7 +77,7 @@
                         // console.log(_this);
                         console.log("get data from",logurl);
                         oboe(logurl).node(
-                            '{Time_Step UAV_ID Latitude Longitude Old_X_speed Old_Y_speed X_speed Y_speed Conflict_UAV Flag}',
+                            '{Time_Step UAV_ID Latitude Longitude Conflict_UAV Flag}',
                             async function (jsonObject) {
                                 _this.logData.push(jsonObject);
                             }
