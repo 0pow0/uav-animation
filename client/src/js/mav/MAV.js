@@ -7,7 +7,7 @@ class MAV {
         this.markerStyle = null;
 
         this.level1 = {
-            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            path: "M -2,0 0,-2 2,0 0,2 z",
             scale: 6,
             fillColor: "#95ff6d",
             fillOpacity: 2,
@@ -17,7 +17,7 @@ class MAV {
         };
 
         this.level2 = {
-            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            path: "M -2,0 0,-2 2,0 0,2 z",
             scale: 6,
             fillColor: "#32b300",
             fillOpacity: 2,
@@ -26,7 +26,7 @@ class MAV {
         };
 
         this.level3 = {
-            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            path: "M -2,0 0,-2 2,0 0,2 z",
             scale: 6,
             fillColor: "#00aeff",
             fillOpacity: 2,
@@ -36,7 +36,7 @@ class MAV {
         };
 
         this.level4 = {
-            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            path: "M -2,0 0,-2 2,0 0,2 z",
             scale: 6,
             fillColor: "#1500ff",
             fillOpacity: 2,

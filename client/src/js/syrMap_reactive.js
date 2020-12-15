@@ -329,29 +329,30 @@ class syrMap_reactive {
                         currUAV.long = Number(this._uavdata[currIndex].Longitude);
                         let icon = null;
                         // conflict with uav is yellow
-                        if (this._uavdata[currIndex].Flag == 1) {
-                            icon = this.yellow_dot;
+                        if (this._uavdata[currIndex].Flag === "1") {
+                            image = this.yellow_dot;
                         }
                         // conflict with mav is red
-                        if (this._uavdata[currIndex].Flag == 2) {
-                            icon = this.red_dot;
+                        if (this._uavdata[currIndex].Flag === "2") {
+                            image = this.red_dot;
                         }
                         //if normnal to conflict
-                        if (this._uavdata[currIndex].finished == 2) {
+                        if (this._uavdata[currIndex].finished === "2" && currUAV.state === true) {
                             currUAV.state = false;
                             currUAV.mapmarker.setMap(null);
                             currUAV.mapmarker = new google.maps.Marker({
                                 position: {
-                                    lat: currUAV.lat,
+                                   lat: currUAV.lat,
                                     lng: currUAV.long
                                 },
                                 map: this.googlemap,
-                                icon: icon
+                                icon: image
                             });
+			    currUAV.mapmarker.setMap(this.googlemap);
                             //console.log("change to confict");
                         }
                         //if confict to normal
-                        else if(this._uavdata[currIndex].finished == 1 && currUAV.state == false){
+                        else if(this._uavdata[currIndex].finished === "1" && currUAV.state == false){
                             // console.log(currUAV.ID);
                             currUAV.state = true;
                             currUAV.mapmarker.setMap(null);
