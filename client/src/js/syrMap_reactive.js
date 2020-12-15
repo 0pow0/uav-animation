@@ -167,14 +167,17 @@ class syrMap_reactive {
 
 
     fly() {
+        if (this.updateCurrtimeFlag) {
+            let res = this.updateCurrtime();
+            if (!res) {
+                return;
+            }
+        }
+
         if (this.flying) {
             return;
         } else {
             this.flying = true;
-        }
-
-        if (this.updateCurrtimeFlag) {
-            this.updateCurrtime();
         }
 
         let intervalId = setInterval(() => {
@@ -338,6 +341,7 @@ class syrMap_reactive {
                         }
                         //if normnal to conflict
                         if (this._uavdata[currIndex].finished === "2" && currUAV.state === true) {
+
                             currUAV.state = false;
                             currUAV.mapmarker.setMap(null);
                             currUAV.mapmarker = new google.maps.Marker({
@@ -478,7 +482,12 @@ class syrMap_reactive {
     updateCurrtime() {
         let endIndex = this._uavdata.length;
         if (Number(this._uavdata[endIndex-1].TimeStep) < this.updatedCurrTime) {
-            alert("input time doesn't exist in data");
+            alert("Input time step" + this.updatedCurrTime + "last time step in pool " + Number(this._uavdata[endIndex-1].TimeStep) + "\n" +
+                "Make sure input time step in the range.\n" +
+                "If true, please wait a few minutes to load data into pool.\n" +
+                "Don't refresh this page and try again.");
+            // console.log();
+            return false;
         }
         let startIndex = 0;
         let midIndex;
@@ -502,6 +511,8 @@ class syrMap_reactive {
         }
         //move to that timestep
         this._uavdata.splice(0, resultIndex);
+        this.updateCurrtimeFlag = false;
+        return true;
     }
 
 }
