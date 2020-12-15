@@ -333,11 +333,11 @@ class syrMap_reactive {
                         let icon = null;
                         // conflict with uav is yellow
                         if (this._uavdata[currIndex].Flag === "1") {
-                            image = this.yellow_dot;
+                            icon = this.yellow_dot;
                         }
                         // conflict with mav is red
                         if (this._uavdata[currIndex].Flag === "2") {
-                            image = this.red_dot;
+                            icon = this.red_dot;
                         }
                         //if normnal to conflict
                         if (this._uavdata[currIndex].finished === "2" && currUAV.state === true) {
@@ -350,13 +350,13 @@ class syrMap_reactive {
                                     lng: currUAV.long
                                 },
                                 map: this.googlemap,
-                                icon: image
+                                icon: icon
                             });
 			    currUAV.mapmarker.setMap(this.googlemap);
                             //console.log("change to confict");
                         }
                         //if confict to normal
-                        else if(this._uavdata[currIndex].finished === "1" && currUAV.state == false){
+                        else if(this._uavdata[currIndex].finished === "1" && currUAV.state === false){
                             // console.log(currUAV.ID);
                             currUAV.state = true;
                             currUAV.mapmarker.setMap(null);
