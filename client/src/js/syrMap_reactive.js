@@ -335,14 +335,14 @@ class syrMap_reactive {
                         // conflict with uav is yellow
                         if (this._uavdata[currIndex].Flag === "1") {
                             icon = {
-                                path: this.yellow_dot_path,
+                                url: this.yellow_dot_path,
                                 size: new google.maps.Size(Number(3), Number(3))
                             };
                         }
                         // conflict with mav is red
                         if (this._uavdata[currIndex].Flag === "2") {
                             icon = {
-                                path: this.red_dot_path,
+                                url: this.red_dot_path,
                                 size: new google.maps.Size(Number(3), Number(3))
                             };
                         }
@@ -359,7 +359,7 @@ class syrMap_reactive {
                                 map: this.googlemap,
                                 icon: icon
                             });
-			    currUAV.mapmarker.setMap(this.googlemap);
+			                currUAV.mapmarker.setMap(this.googlemap);
                             //console.log("change to confict");
                         }
                         //if confict to normal
