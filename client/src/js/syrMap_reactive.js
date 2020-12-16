@@ -29,7 +29,7 @@ class syrMap_reactive {
         //flags
         this.showTrackFlag = document.getElementById('uavTrackChkBox').checked;
         this.showUAVIDFlag = document.getElementById('uavIDChkBox').checked;
-        this.timeInterval = 0;
+        this.timeInterval = 1;
         this.hideUAVFlag = document.getElementById('uavHideChkBox').checked;
         this.hideUAVTrackFlag = document.getElementById('uavHideChkBox').checked;
         this.updateCurrtimeFlag = false;
@@ -336,14 +336,14 @@ class syrMap_reactive {
                         if (this._uavdata[currIndex].Flag === "1") {
                             icon = {
                                 url: this.yellow_dot_path,
-                                size: new google.maps.Size(Number(3), Number(3))
+                                scaledSize: new google.maps.Size(45, 45)
                             };
                         }
                         // conflict with mav is red
                         if (this._uavdata[currIndex].Flag === "2") {
                             icon = {
                                 url: this.red_dot_path,
-                                size: new google.maps.Size(Number(3), Number(3))
+                                scaledSize: new google.maps.Size(45, 45)
                             };
                         }
                         //if normnal to conflict
@@ -359,7 +359,7 @@ class syrMap_reactive {
                                 map: this.googlemap,
                                 icon: icon
                             });
-			                currUAV.mapmarker.setMap(this.googlemap);
+			    currUAV.mapmarker.setMap(this.googlemap);
                             //console.log("change to confict");
                         }
                         //if confict to normal
