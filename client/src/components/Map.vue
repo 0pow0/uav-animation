@@ -105,7 +105,7 @@ export default {
                     } else {
                         console.log(`flag: ${flag}`);
                     }
-                    this.mapGoogle = new syrMap_reactive('map',this.uavData,this.startData,this.endData, this.mavData);
+                    this.mapGoogle = new syrMap_reactive('map',this.uavData,this.startData,this.endData, this.mavData, this.baseStationData);
                     break;
                 case 'reduce_turn_point':
                     this.uavData = await this.getUAVData(urlUAV_tp);
@@ -427,26 +427,27 @@ export default {
                     oboe(uavURL)
                         .node(
                         '{TimeStep ID Latitude Longitude ' +
-                        'finished Level Flag}',
+                        'finished Level Flag eNB_ID}',
                         async function (jsonObject) {
                             if (_this.new_data_flag) {
                                 console.log("initial uav pipe abort");
                                 this.abort();
                             }
                             else {
-                                pool.push(jsonObject);
-                                if (pool.length > 1000) {
-                                    _this.uavData.push(pool.shift());
-                                }
+                                //pool.push(jsonObject);
+                                //if (pool.length > 1000) {
+                                //    _this.uavData.push(pool.shift());
+                                //}
+                                _this.uavData.push(jsonObject);
                                 // console.log(_this.uavData.length);
                             }
                             return oboe.drop;
                         });
                     // console.log("_this uav data length",_this.uavData.length);
+                    
                     const flag = await _this.checkUAVData();
                     if (flag) {
                         console.log("_this uav data length",_this.uavData.length);
-
                         resolve(
                             _this.uavData.map(post => ({
                                 ...post,
