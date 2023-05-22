@@ -6,7 +6,7 @@ npm run prod
 
 cd client
 npm run buikd
-npm run prod
+npm run serve
 ```
 
 # 2020 SU UAV Animation(Vue)
