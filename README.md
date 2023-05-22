@@ -1,3 +1,14 @@
+Build and Run:
+```
+cd server
+npm run build
+npm run prod
+
+cd client
+npm run buikd
+npm run prod
+```
+
 # 2020 SU UAV Animation(Vue)
 Update Aug 8
 
