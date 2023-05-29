@@ -2,11 +2,13 @@ Build and Run:
 ```
 cd client
 npm install
-npm run serve
+npm run build
 
 cd server
 npm install
 npm run prod
+# OR with pm2
+pm2 start npm -- run prod
 ```
 
 # 2020 SU UAV Animation(Vue)
